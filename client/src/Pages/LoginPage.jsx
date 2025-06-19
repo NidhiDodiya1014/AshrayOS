@@ -1,10 +1,14 @@
-import { useState } from "react"
-import "./LoginPage.css"
+import { useState } from "react";
+import "./LoginPage.css";
+import axios from "axios";
+
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
-  const [selectedRole, setSelectedRole] = useState(null)
-  const [isTransitioning, setIsTransitioning] = useState(false)
-  const [formData, setFormData] = useState({ username: "", password: "" })
+  const Navigate = useNavigate();
+  const [selectedRole, setSelectedRole] = useState(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [formData, setFormData] = useState({ id: "", password: "" });
 
   const roles = [
     {
@@ -28,39 +32,74 @@ export default function LoginPage() {
       description: "Full system control",
       gradient: "admin-gradient",
     },
-  ]
+  ];
 
   const handleRoleSelect = (roleId) => {
-    setSelectedRole(roleId)
-  }
+    setSelectedRole(roleId);
+  };
 
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (!selectedRole) {
-      alert("Please select a role first!")
-      return
+      alert("Please select a role first!");
+      return;
     }
 
-    setIsTransitioning(true)
+    console.log(`Logging in as ${selectedRole} with:`, formData);
+    try {
+      const response = await axios.post("http://localhost:5000/login", {
+        id: formData.id,
+        password: formData.password,
+        role: selectedRole,
+      });
 
-    // Simulate login process
-    setTimeout(() => {
-      console.log(`Logging in as ${selectedRole} with:`, formData)
-      // Here you would handle the actual login logic
-      setIsTransitioning(false)
-    }, 2000)
-  }
+      if (response.data.success) {
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setIsTransitioning(false);
+          console.log(response.data.user);
+          let userID;
+          if (selectedRole === "student") {
+            userID = response.data.user.StudentID;
+          } else if (selectedRole === "warden") {
+            userID = response.data.user.WardenID;
+          } else if (selectedRole === "admin") {
+            userID = response.data.user.AdminID;
+          }
+          // console.log("User ID:", userID);
+          // console.log("Selected Role:", selectedRole);
+          // console.log(response.data.user.Name);
+          // console.log(response.data.user.Email);
+          console.log(userID);
+          Navigate(`/${selectedRole}`, {
+            state: {
+              Name: response.data.user.Name,
+              ID: userID,
+              Email: response.data.user.Email,
+            },
+          });
+        }, 2000);
+      } else {
+        alert("Invalid credentials. Please try again.");
+        setFormData({ id: "", password: "" });
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Invalid credentials. Please try again.");
+      setFormData({ id: "", password: "" });
+      return;
+    }
+  };
 
   return (
     <div className="login-page">
-      {/* Animated Background */}
       <div className="animated-bg">
         <div className="blob blob-1"></div>
         <div className="blob blob-2"></div>
@@ -68,32 +107,32 @@ export default function LoginPage() {
         <div className="blob blob-4"></div>
       </div>
 
-      {/* Floating Particles */}
       <div className="particles">
         {[...Array(12)].map((_, i) => (
           <div key={i} className={`particle particle-${i + 1}`}></div>
         ))}
       </div>
 
-      {/* Main Content */}
       <div className="login-container">
-        {/* Header */}
         <div className="login-header">
           <div className="logo-container">
             <div className="logo">✨</div>
           </div>
           <h1 className="login-title">Hostel Portal</h1>
-          <p className="login-subtitle">Experience the future of hostel management</p>
+          <p className="login-subtitle">
+            Experience the future of hostel management
+          </p>
         </div>
 
-        {/* Role Selection */}
         <div className="role-selection">
           <h2 className="role-title">Select Your Role</h2>
           <div className="role-grid">
             {roles.map((role) => (
               <div
                 key={role.id}
-                className={`role-card ${selectedRole === role.id ? "selected" : ""} ${role.gradient}`}
+                className={`role-card ${
+                  selectedRole === role.id ? "selected" : ""
+                } ${role.gradient}`}
                 onClick={() => handleRoleSelect(role.id)}
               >
                 <div className="role-icon">{role.emoji}</div>
@@ -107,22 +146,24 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Login Form */}
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="username" className="form-label">
-              Username
+            <label htmlFor="id" className="form-label">
+              {selectedRole
+                ? roles.find((r) => r.id === selectedRole)?.title
+                : "User"}{" "}
+              ID
             </label>
             <div className="input-container">
               <span className="input-icon">👤</span>
               <input
                 type="text"
-                id="username"
-                name="username"
-                value={formData.username}
+                id="id"
+                name="id"
+                value={formData.id}
                 onChange={handleInputChange}
                 className="form-input"
-                placeholder="Enter your username"
+                placeholder="Enter your ID"
                 required
               />
             </div>
@@ -159,20 +200,23 @@ export default function LoginPage() {
               </div>
             ) : (
               <>
-                <span>Login as {selectedRole ? roles.find((r) => r.id === selectedRole)?.title : "User"}</span>
+                <span>
+                  Login as{" "}
+                  {selectedRole
+                    ? roles.find((r) => r.id === selectedRole)?.title
+                    : "User"}
+                </span>
                 <span className="btn-arrow">→</span>
               </>
             )}
           </button>
         </form>
 
-        {/* Footer */}
         <div className="login-footer">
           <p>Crafted with ❤️ for the next generation</p>
         </div>
       </div>
 
-      {/* Transition Overlay */}
       {isTransitioning && (
         <div className="transition-overlay">
           <div className="transition-content">
@@ -183,5 +227,5 @@ export default function LoginPage() {
         </div>
       )}
     </div>
-  )
+  );
 }

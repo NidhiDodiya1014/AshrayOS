@@ -1,11 +1,8 @@
-/* Base Styles */
-* {
+/* SCOPED TO UNBOOK LAUNDRY ONLY */
+.unbook-laundry-page {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-.unbook-laundry-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #1a0b2e 0%, #16213e 50%, #0f3460 100%);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -13,6 +10,12 @@
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
+}
+
+.unbook-laundry-page * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .unbook-container {
@@ -345,4 +348,15 @@
 
 .primary-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px\
+  box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
+}
+
+.secondary-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.secondary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+}

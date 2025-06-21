@@ -1,17 +1,20 @@
 "use client";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "../Styles/RoomChange.css";
 
-export default function RoomChange() {
+export default function LeaveRequest() {
   const location = useLocation();
   const navigate = useNavigate();
   const { ID, Name, Email } = location.state || {};
+  console.log("LeaveRequest frontend", { ID, Name, Email });
 
-  const [currentRoom, setCurrentRoom] = useState("");
-  const [newRoom, setNewRoom] = useState("");
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
   const [reason, setReason] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -19,8 +22,13 @@ export default function RoomChange() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!currentRoom.trim() || !newRoom.trim() || !reason.trim()) {
+    if (!fromDate || !toDate || !reason.trim()) {
       setStatusMessage("❌ Please fill out all fields.");
+      return;
+    }
+
+    if (toDate < fromDate) {
+      setStatusMessage("❌ 'To Date' must be after 'From Date'.");
       return;
     }
 
@@ -28,21 +36,21 @@ export default function RoomChange() {
     setStatusMessage("");
 
     axios
-      .post("http://localhost:5000/roomChangeRequest", {
+      .post("http://localhost:5000/leaveRequest", {
         StudentID: ID,
-        CurrentRoom: currentRoom,
-        DesiredRoom: newRoom,
+        FromDate: fromDate,
+        ToDate: toDate,
         Reason: reason,
       })
-      .then((response) => {
-        setStatusMessage("✅ Room change request submitted successfully!");
-        setCurrentRoom("");
-        setNewRoom("");
+      .then((res) => {
+        setStatusMessage("✅ Leave request submitted successfully!");
+        setFromDate("");
+        setToDate("");
         setReason("");
       })
-      .catch((error) => {
-        console.error("Error submitting request:", error);
-        setStatusMessage("❌ Error submitting request. Please try again.");
+      .catch((err) => {
+        console.error(err);
+        setStatusMessage("❌ Error submitting leave request.");
       })
       .finally(() => setSubmitting(false));
   };
@@ -50,25 +58,27 @@ export default function RoomChange() {
   return (
     <div className="room-change-page">
       <div className="room-change-container">
-        {/* Header Section */}
+        {/* Header */}
         <div className="room-change-header">
           <div className="header-content">
             <div className="logo-section">
               <div className="logo-icon">
-                <span>🏠</span>
+                <span>📝</span>
               </div>
               <div className="header-text">
-                <h1>Room Change Request</h1>
-                <p>
-                  Submit your request for a room change with detailed
-                  information
-                </p>
+                <h1>Leave Request Form</h1>
+                <p>Fill in your leave details for approval</p>
               </div>
             </div>
+
+            <button className="home-button" onClick={() => navigate("/")}>
+              <span>🏠</span>
+              Home
+            </button>
           </div>
         </div>
 
-        {/* User Info Section */}
+        {/* User Info */}
         <div className="user-section">
           <div className="user-card">
             <div className="user-avatar">
@@ -90,93 +100,61 @@ export default function RoomChange() {
           </div>
         </div>
 
-        {/* Navigation Section */}
-        <div className="navigation-section">
-          <div className="nav-buttons">
-            <button
-              onClick={() =>
-                navigate("/student", { state: { ID, Name, Email } })
-              }
-              className="nav-button primary"
-            >
-              <span>📊</span>
-              <span>Dashboard</span>
-            </button>
-
-            <button
-              onClick={() =>
-                navigate("/showAllRoomReq", { state: { ID, Name, Email } })
-              }
-              className="nav-button primary"
-            >
-              <span>📂</span>
-              <span>See Room Change Requests</span>
-            </button>
-            <button className="home-button" onClick={() => navigate("/")}>
-              <span>🏠</span>
-              Home
-            </button>
-          </div>
-        </div>
-
-        {/* Form Section */}
+        {/* Form */}
         <div className="form-section">
           <form onSubmit={handleSubmit} className="room-change-form">
-            {/* Room Information */}
             <div className="form-group-section">
               <h3 className="section-title">
-                Room Information
+                Leave Duration
               </h3>
-              
               <div className="form-grid">
                 <div className="form-field">
-                  <label className="field-label">Current Room Number</label>
-                  <input
+                  <label className="field-label">From Date</label>
+                  <DatePicker
+                    selected={fromDate}
+                    onChange={(date) => setFromDate(date)}
+                    dateFormat="yyyy-MM-dd"
+                    placeholderText="Select start date"
                     className="field-input"
-                    type="text"
-                    value={currentRoom}
-                    onChange={(e) => setCurrentRoom(e.target.value)}
-                    placeholder="Enter your current room number"
                     required
                   />
                 </div>
-                
                 <div className="form-field">
-                  <label className="field-label">Preferred New Room</label>
-                  <input
+                  <label className="field-label">To Date</label>
+                  <DatePicker
+                    selected={toDate}
+                    onChange={(date) => setToDate(date)}
+                    dateFormat="yyyy-MM-dd"
+                    placeholderText="Select end date"
                     className="field-input"
-                    type="text"
-                    value={newRoom}
-                    onChange={(e) => setNewRoom(e.target.value)}
-                    placeholder="Enter preferred room number"
                     required
                   />
                 </div>
               </div>
             </div>
-               {/* Status Message */}
-        {statusMessage && (
-          <div
-            className={`status-alert ${
-              statusMessage.startsWith("✅") ? "success" : "error"
-            }`}
-          >
-            <span className="status-text">{statusMessage}</span>
-          </div>
-        )}
-            {/* Reason Details */}
+            {/* Status Message */}
+            {statusMessage && (
+              <div
+                className={`status-alert ${
+                  statusMessage.startsWith("✅") ? "success" : "error"
+                }`}
+              >
+                <span className="status-text">{statusMessage}</span>
+              </div>
+            )}
+
             <div className="form-group-section">
               <h3 className="section-title">
-                Request Details
+                Leave Reason
               </h3>
               <div className="textarea-container">
-                <label className="field-label">Reason for Room Change</label>
+                <label className="field-label">Reason for Leave</label>
                 <textarea
                   className="reason-textarea"
                   rows="6"
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
-                  placeholder="Please provide a detailed explanation for your room change request. Include any specific requirements or circumstances that support your request."
+                  placeholder="Please specify the reason for your leave"
                   maxLength="500"
                   required
                 />
@@ -184,9 +162,7 @@ export default function RoomChange() {
                   <span className="character-count">
                     {reason.length}/500 characters
                   </span>
-                  <span className="helper-text">
-                    Be specific about your reasons
-                  </span>
+                  <span className="helper-text">Be clear and specific</span>
                 </div>
               </div>
             </div>
@@ -196,7 +172,7 @@ export default function RoomChange() {
               <button
                 type="submit"
                 className="submit-button"
-                disabled={submitting || !reason.trim()}
+                disabled={submitting}
               >
                 {submitting ? (
                   <>
@@ -214,11 +190,33 @@ export default function RoomChange() {
           </form>
         </div>
 
-        
+        <div className="navigation-section">
+          <div className="nav-buttons">
+            <button
+              onClick={() =>
+                navigate("/student", { state: { ID, Name, Email } })
+              }
+              className="nav-button primary"
+            >
+              <span>📊</span>
+              <span>Dashboard</span>
+            </button>
+
+            <button
+              onClick={() =>
+                navigate("/showAllLeaveReq", { state: { ID, Name, Email } })
+              }
+              className="nav-button secondary"
+            >
+              <span>📂</span>
+              <span>See All Leave Requests</span>
+            </button>
+          </div>
+        </div>
 
         {/* Footer */}
         <div className="room-change-footer">
-          <p>Your request will be reviewed by the hostel administration</p>
+          <p>Your leave request will be reviewed by the administration</p>
         </div>
       </div>
     </div>

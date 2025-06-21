@@ -59,7 +59,7 @@ export default function ShowAllStudentInfo() {
     { label: "Email", value: email, icon: "📧" },
     { label: "Contact", value: contact, icon: "📞" },
     { label: "Gender", value: gender, icon: "⚧" },
-    { label: "Room ID", value: roomID, icon: "🏠" },
+    { label: "Room Number", value: roomID, icon: "🏠" },
   ]
 
   if (loading) {

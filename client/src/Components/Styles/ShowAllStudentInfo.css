@@ -1,11 +1,8 @@
-/* Base Styles */
-* {
+/* SCOPED TO STUDENT INFO ONLY */
+.student-info-page {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-.student-info-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #1a0b2e 0%, #16213e 50%, #0f3460 100%);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -13,6 +10,12 @@
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
+}
+
+.student-info-page * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .info-container {

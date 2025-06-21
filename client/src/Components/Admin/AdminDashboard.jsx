@@ -1,10 +1,11 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import './AdminDashboard.css';
+import '../Styles/AdminDashboard.css'; 
 
 export default function AdminDashboard() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { ID, Name, Email } = location.state || {};
 
   const [selectedSection, setSelectedSection] = useState("");
@@ -93,6 +94,14 @@ export default function AdminDashboard() {
   return (
     <div className="admin-dashboard">
       <div className="dashboard-container">
+        {/* Home Button */}
+        <div className="home-button-container">
+          <button className="home-button" onClick={() => navigate("/")}>
+            <span>🏠</span>
+            Go to Home Page
+          </button>
+        </div>
+
         {/* Header Section */}
         <div className="dashboard-header">
           <div className="logo-container">
@@ -319,7 +328,7 @@ export default function AdminDashboard() {
 
         {/* Footer */}
         <div className="dashboard-footer">
-          <p>Crafted with ❤️ for the next generation</p>
+          <p>Crafted with ❤️ for the Admins</p>
         </div>
       </div>
     </div>

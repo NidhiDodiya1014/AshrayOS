@@ -213,7 +213,7 @@ export default function LoginPage() {
         </form>
 
         <div className="login-footer">
-          <p>Crafted with ❤️ for the next generation</p>
+          <p>Crafted with ❤️ for everyone</p>
         </div>
       </div>
 

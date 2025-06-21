@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom"
 import "../Styles/unbookLaundry.css"
 
 export default function LaundrySlots() {
+  
   const location = useLocation()
   const { ID, Name, Email } = location.state || {}
   const [slots, setSlots] = useState([])

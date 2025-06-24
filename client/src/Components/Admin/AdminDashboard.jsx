@@ -1,17 +1,23 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import '../Styles/AdminDashboard.css'; 
+import "../Styles/AdminDashboard.css";
 
+/**
+ * ADMIN DASHBOARD
+ * ───────────────
+ * • “Student Data” card → navigates to /students (ShowAllStudents.jsx).
+ * • “Warden Data” card → inline warden-management tools (same UI as before).
+ * • All original class-names preserved, so no CSS changes are required.
+ */
 export default function AdminDashboard() {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const location   = useLocation();
+  const navigate   = useNavigate();
   const { ID, Name, Email } = location.state || {};
 
   const [selectedSection, setSelectedSection] = useState("");
-  const [studentData, setStudentData] = useState([]);
-  const [wardenData, setWardenData] = useState([]);
-  const [error, setError] = useState(false);
+  const [wardenData, setWardenData]           = useState([]);
+  const [error, setError]                     = useState(false);
 
   const [showAddWardenForm, setShowAddWardenForm] = useState(false);
   const [wardenForm, setWardenForm] = useState({
@@ -19,64 +25,63 @@ export default function AdminDashboard() {
   });
 
   const [successMsg, setSuccessMsg] = useState("");
-  const [justAddedWarden, setJustAddedWarden] = useState(false);
   const [reloadWardenData, setReloadWardenData] = useState(false);
 
+  /* ──────────────────────────────────────────────────────────
+     Fetch wardens whenever that section is selected / reloaded
+  ─────────────────────────────────────────────────────────── */
   useEffect(() => {
-    if (selectedSection === "students") {
-      axios.get("http://localhost:5000/studentData")
-           .then(res => setStudentData(res.data.user))
-           .catch(err => { console.error(err); setError(true); });
-    } else if (selectedSection === "wardens") {
-      axios.get("http://localhost:5000/wardenData")
-           .then(res => setWardenData(res.data.wardens))
-           .catch(err => { console.error(err); setError(true); });
+    if (selectedSection === "wardens") {
+      axios
+        .get("http://localhost:5000/wardenData")
+        .then(res => setWardenData(res.data.wardens))
+        .catch(err => { console.error(err); setError(true); });
     }
   }, [selectedSection, reloadWardenData]);
 
-  useEffect(() => {
-    if (selectedSection !== "wardens") {
-      setJustAddedWarden(false);
-      setShowAddWardenForm(false);
-    }
-  }, [selectedSection]);
-
+  /* ────────────────────────────
+     Helpers (add / delete wardens)
+  ────────────────────────────── */
   const handleWardenChange = e =>
     setWardenForm({ ...wardenForm, [e.target.name]: e.target.value });
 
   const handleWardenSubmit = e => {
     e.preventDefault();
-    axios.post("http://localhost:5000/addWarden", wardenForm)
+    axios
+      .post("http://localhost:5000/addWarden", wardenForm)
       .then(() => {
         setSuccessMsg("✅ Warden added successfully!");
         setWardenForm({ id: "", name: "", email: "", password: "", contact: "" });
         setShowAddWardenForm(false);
-        setJustAddedWarden(true);
         setSelectedSection("wardens");
         setReloadWardenData(prev => !prev);
         setTimeout(() => setSuccessMsg(""), 3000);
       })
-      .catch(err => { 
-        console.error(err); 
-        setSuccessMsg("❌ Failed to add warden."); 
+      .catch(err => {
+        console.error(err);
+        setSuccessMsg("❌ Failed to add warden.");
         setTimeout(() => setSuccessMsg(""), 3000);
       });
   };
 
   const handleRemoveWarden = id => {
-    axios.delete("http://localhost:5000/removeWarden", { params: { id } })
+    axios
+      .delete("http://localhost:5000/removeWarden", { params: { id } })
       .then(() => {
         setSuccessMsg(`🗑️ Warden ${id} removed successfully!`);
         setReloadWardenData(prev => !prev);
         setTimeout(() => setSuccessMsg(""), 3000);
       })
-      .catch(err => { 
-        console.error(err); 
-        setSuccessMsg("❌ Failed to remove warden."); 
+      .catch(err => {
+        console.error(err);
+        setSuccessMsg("❌ Failed to remove warden.");
         setTimeout(() => setSuccessMsg(""), 3000);
       });
   };
 
+  /* ─────────────
+     Error Screen
+  ───────────── */
   if (error) {
     return (
       <div className="admin-dashboard">
@@ -91,9 +96,13 @@ export default function AdminDashboard() {
     );
   }
 
+  /* ───────────
+     Main Layout
+  ─────────── */
   return (
     <div className="admin-dashboard">
       <div className="dashboard-container">
+
         {/* Home Button */}
         <div className="home-button-container">
           <button className="home-button" onClick={() => navigate("/")}>
@@ -102,22 +111,18 @@ export default function AdminDashboard() {
           </button>
         </div>
 
-        {/* Header Section */}
+        {/* Header */}
         <div className="dashboard-header">
           <div className="logo-container">
-            <div className="logo-icon">
-              <span>👑</span>
-            </div>
+            <div className="logo-icon"><span>👑</span></div>
             <h1>Admin Portal</h1>
           </div>
-          <p className="tagline">Full system control & management</p>
+          <p className="tagline">Full system control &amp; management</p>
         </div>
 
-        {/* Admin Info Card */}
+        {/* Admin Info */}
         <div className="admin-info-card">
-          <div className="admin-avatar">
-            <span>{Name?.charAt(0) || 'A'}</span>
-          </div>
+          <div className="admin-avatar"><span>{Name?.charAt(0) || "A"}</span></div>
           <div className="admin-details">
             <h2>Welcome, {Name}</h2>
             <div className="admin-meta">
@@ -127,100 +132,59 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* Section Selection */}
+        {/* Section Selector */}
         <div className="section-selector">
           <h3>Choose Management Section</h3>
           <div className="section-options">
-            <div 
-              className={`section-card ${selectedSection === 'students' ? 'active' : ''}`}
-              onClick={() => setSelectedSection('students')}
+
+            {/* STUDENT DATA → Navigate to ShowAllStudents */}
+            <div
+              className="section-card"
+              onClick={() => navigate("/studentsDataAll", { state: { ID, Name, Email } })}
             >
-              <div className="section-icon student-icon">
-                <span>🎓</span>
-              </div>
+              <div className="section-icon student-icon"><span>🎓</span></div>
               <h4>Student Data</h4>
-              <p>Manage student records & information</p>
+              <p>Manage student records &amp; information</p>
             </div>
-            
-            <div 
-              className={`section-card ${selectedSection === 'wardens' ? 'active' : ''}`}
-              onClick={() => setSelectedSection('wardens')}
+
+            {/* WARDEN DATA (inline) */}
+            <div
+              className={`section-card ${selectedSection === "wardens" ? "active" : ""}`}
+              onClick={() => setSelectedSection("wardens")}
             >
-              <div className="section-icon warden-icon">
-                <span>🛡️</span>
-              </div>
+              <div className="section-icon warden-icon"><span>🛡️</span></div>
               <h4>Warden Data</h4>
-              <p>Manage warden accounts & permissions</p>
+              <p>Manage warden accounts &amp; permissions</p>
             </div>
           </div>
         </div>
 
-        {/* Success/Error Messages */}
+        {/* Success / Error Messages */}
         {successMsg && (
-          <div className={`message-card ${successMsg.startsWith('✅') ? 'success' : 'error'}`}>
+          <div className={`message-card ${successMsg.startsWith("✅") ? "success" : "error"}`}>
             <span>{successMsg}</span>
           </div>
         )}
 
-        {/* Content Sections */}
-        {selectedSection === "students" && (
-          <div className="content-section fade-in">
-            <div className="section-header">
-              <h2>
-                <span className="section-icon-small">🎓</span>
-                Student Records
-              </h2>
-              <div className="student-count">
-                Total: {studentData.length} students
-              </div>
-            </div>
-            
-            <div className="data-grid">
-              {studentData.map((student, index) => (
-                <div key={index} className="data-card student-card">
-                  <div className="card-header">
-                    <div className="student-avatar">
-                      <span>{student.Name?.charAt(0) || 'S'}</span>
-                    </div>
-                    <div className="card-info">
-                      <h4>{student.Name}</h4>
-                      <span className="id-badge">ID: {student.StudentID}</span>
-                    </div>
-                  </div>
-                  <div className="card-details">
-                    <div className="detail-item">
-                      <span className="detail-icon">📧</span>
-                      <span>{student.Email}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
+        {/* ─────────────────────────────
+            WARDEN MANAGEMENT (unchanged)
+        ────────────────────────────── */}
         {selectedSection === "wardens" && (
           <div className="content-section fade-in">
             <div className="section-header">
-              <h2>
-                <span className="section-icon-small">🛡️</span>
-                Warden Management
-              </h2>
+              <h2><span className="section-icon-small">🛡️</span>Warden Management</h2>
               <div className="section-actions">
-                <div className="warden-count">
-                  Total: {wardenData.length} wardens
-                </div>
-                <button 
+                <div className="warden-count">Total: {wardenData.length} wardens</div>
+                <button
                   className="add-button"
                   onClick={() => setShowAddWardenForm(!showAddWardenForm)}
                 >
-                  <span>+</span>
-                  {showAddWardenForm ? "Cancel" : "Add Warden"}
+                  <span>+</span>{showAddWardenForm ? "Cancel" : "Add Warden"}
                 </button>
               </div>
             </div>
 
-            {/* Add Warden Form */}
+            {/* Add-Warden Form */}
             {showAddWardenForm && (
               <div className="form-container slide-down">
                 <div className="form-card">
@@ -248,7 +212,7 @@ export default function AdminDashboard() {
                         />
                       </div>
                     </div>
-                    
+
                     <div className="form-row">
                       <div className="input-group">
                         <span className="input-icon">📧</span>
@@ -272,7 +236,7 @@ export default function AdminDashboard() {
                         />
                       </div>
                     </div>
-                    
+
                     <div className="input-group full-width">
                       <span className="input-icon">🔒</span>
                       <input
@@ -284,23 +248,22 @@ export default function AdminDashboard() {
                         onChange={handleWardenChange}
                       />
                     </div>
-                    
+
                     <button type="submit" className="submit-button">
-                      <span>✨</span>
-                      Create Warden Account
+                      <span>✨</span>Create Warden Account
                     </button>
                   </form>
                 </div>
               </div>
             )}
-            
+
             {/* Warden List */}
             <div className="data-grid">
               {wardenData.map((warden, index) => (
                 <div key={index} className="data-card warden-card">
                   <div className="card-header">
                     <div className="warden-avatar">
-                      <span>{warden.Name?.charAt(0) || 'W'}</span>
+                      <span>{warden.Name?.charAt(0) || "W"}</span>
                     </div>
                     <div className="card-info">
                       <h4>{warden.Name}</h4>

@@ -32,7 +32,7 @@ export default function WardenDashboard() {
       title: "Laundry Management",
       description: "Monitor laundry bookings",
       icon: "🧺",
-      action: () => navigate("/laundryManagement", { state: { ID, Name, Email } }),
+      action: () => navigate("/laundrySlots", { state: { ID, Name, Email } }),
       color: "warden",
     },
   ];

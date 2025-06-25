@@ -1,0 +1,17 @@
+.submit-button, .remove-button {
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.submit-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.remove-button {
+  background-color: #dc3545;
+  color: white;
+}

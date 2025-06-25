@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import axios from "axios"
 import "../Styles/ShowAllStudentInfo.css"
+const url = import.meta.env.VITE_BASE_URL;
+
 
 export default function ShowAllStudentInfo() {
   const location = useLocation()
@@ -27,7 +29,7 @@ export default function ShowAllStudentInfo() {
     }
 
     axios
-      .get("http://localhost:5000/getStudentInfo", {
+      .get(`${url}getStudentInfo`, {
         params: { ID },
       })
       .then((response) => {

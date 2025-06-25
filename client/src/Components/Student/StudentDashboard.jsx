@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../Styles/StudentDashboard.css";
 
+
 export default function StudentDashboard() {
   const location = useLocation();
   const navigate = useNavigate();

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./Styles/WardenDashboard.css";
+const url = import.meta.env.VITE_BASE_URL;
+
 
 export default function ManageRequests() {
   const navigate = useNavigate();
@@ -18,10 +20,10 @@ export default function ManageRequests() {
   /* ─── Fetch all four tables in parallel on mount / reload ─ */
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:5000/roomChangeRequests"),
-      axios.get("http://localhost:5000/leaveRequests1"),
-      axios.get("http://localhost:5000/complaints"),
-      axios.get("http://localhost:5000/guestEntryRequests"),
+      axios.get(`${url}roomChangeRequests`),
+      axios.get(`${url}leaveRequests1`),
+      axios.get(`${url}complaints`),
+      axios.get(`${url}guestEntryRequests`),
     ])
       .then(([r1, r2, r3, r4]) => {
         console.log("Leave Requests r1:", r1.data?.requests);
@@ -42,10 +44,10 @@ export default function ManageRequests() {
   /* ─── Status update helper ──────────────────────────────── */
   const updateStatus = async (type, id, status) => {
     const urlMap = {
-      room: "http://localhost:5000/updateRoomChangeStatus",
-      leave: "http://localhost:5000/updateLeaveStatus",
-      comp: "http://localhost:5000/updateComplaintStatus",
-      guest: "http://localhost:5000/updateGuestEntryStatus",
+      room: `${url}updateRoomChangeStatu`,
+      leave: `${url}updateLeaveStatu`,
+      comp: `${url}updateComplaintStatu`,
+      guest: `${url}updateGuestEntryStatu`,
     };
     try {
       await axios.put(urlMap[type], { id, status });

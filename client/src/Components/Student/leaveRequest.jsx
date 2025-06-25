@@ -6,6 +6,8 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "../Styles/RoomChange.css";
+const url = import.meta.env.VITE_BASE_URL;
+
 
 export default function LeaveRequest() {
   const location = useLocation();
@@ -36,7 +38,7 @@ export default function LeaveRequest() {
     setStatusMessage("");
 
     axios
-      .post("http://localhost:5000/leaveRequest", {
+      .post(`${url}/leaveRequest`, {
         StudentID: ID,
         FromDate: fromDate,
         ToDate: toDate,

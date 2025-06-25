@@ -2,6 +2,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "../Styles/AdminDashboard.css";
+const url = import.meta.env.VITE_BASE_URL;
+// console.log("url", url);
 
 /**
  * ADMIN DASHBOARD
@@ -32,9 +34,10 @@ export default function AdminDashboard() {
   ─────────────────────────────────────────────────────────── */
   useEffect(() => {
     if (selectedSection === "wardens") {
+      console.log("Fetching wardens data from ", `${url}wardenData`);
       axios
-        .get("http://localhost:5000/wardenData")
-        .then(res => setWardenData(res.data.wardens))
+        .get(`${url}wardenData`)
+        .then(res => {setWardenData(res.data.wardens); console.log("hello"+res.data.wardens)})
         .catch(err => { console.error(err); setError(true); });
     }
   }, [selectedSection, reloadWardenData]);
@@ -48,7 +51,7 @@ export default function AdminDashboard() {
   const handleWardenSubmit = e => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/addWarden", wardenForm)
+      .post(`${url}addWarden`, wardenForm)
       .then(() => {
         setSuccessMsg("✅ Warden added successfully!");
         setWardenForm({ id: "", name: "", email: "", password: "", contact: "" });
@@ -66,7 +69,7 @@ export default function AdminDashboard() {
 
   const handleRemoveWarden = id => {
     axios
-      .delete("http://localhost:5000/removeWarden", { params: { id } })
+      .delete(`${url}removeWarden`, { params: { id } })
       .then(() => {
         setSuccessMsg(`🗑️ Warden ${id} removed successfully!`);
         setReloadWardenData(prev => !prev);

@@ -1,10 +1,11 @@
 import react from "react";
+const url = import.meta.env.VITE_BASE_URL;
 
 export default function AddWarden() {
     return (
         <div className="AddWarden" style={{ color: "white" }}>
         <h1>Add a Warden</h1>
-        <form action="http://localhost:5000/addWarden" method="post">
+        <form action={`{url}addWarden`} method="post">
             <label htmlFor="name">Name:</label>
             <input type="text" id="name" name="name" required />
             <br />

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { useLocation, useNavigate } from "react-router-dom"
 import "../Styles/laundryBooking.css"
+const url = import.meta.env.VITE_BASE_URL;
+
 
 export default function LaundryBooking() {
   const location = useLocation()
@@ -23,7 +25,7 @@ export default function LaundryBooking() {
     }
 
     axios
-      .post("http://localhost:5000/laundryBook", { SlotID, ID })
+      .post(`${url}/laundryBook`, { SlotID, ID })
       .then((res) => {
         setBookingStatus(res.data.message)
         setHasBooked(true)

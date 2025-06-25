@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../Styles/seeVisitRequests.css";
+const url = import.meta.env.VITE_BASE_URL;
+
 
 export default function SeeVisitRequests() {
   const location = useLocation();
@@ -13,7 +15,7 @@ export default function SeeVisitRequests() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/SeeGuestRequests", {
+      .get(`${url}SeeGuestRequests`, {
         params: { StudentID: ID },
       })
       .then((res) => setRequests(res.data))

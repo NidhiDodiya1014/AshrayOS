@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
+const url = import.meta.env.VITE_BASE_URL;
+
 
 export default function ShowAllRoomReq() {
   const [requests, setRequests] = useState([]);
@@ -11,7 +13,7 @@ export default function ShowAllRoomReq() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/showAllRoomReq", { params: { ID } })
+      .get(`${url}showAllRoomReq`, { params: { ID } })
       .then((response) => {
         setRequests(response.data);
         // console.log("Fetched requests:", response.data);

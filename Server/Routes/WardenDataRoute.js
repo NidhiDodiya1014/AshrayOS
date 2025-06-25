@@ -4,8 +4,8 @@ const db = require("../db");
 
 router.get("/wardenData", (req, res) => {
   db.query("SELECT * FROM warden", (err, results) => {
+    console.log("wardens", results)
     if (err) return res.status(500).send("Error fetching wardens");
-    console.log(results)
     res.send({ wardens: results });
   });
 });

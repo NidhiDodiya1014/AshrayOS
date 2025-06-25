@@ -4,6 +4,7 @@ import { useState } from "react"
 import "./LoginPage.css"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+const url = import.meta.env.VITE_BASE_URL
 
 export default function LoginPage() {
   const Navigate = useNavigate()
@@ -55,7 +56,7 @@ export default function LoginPage() {
 
     console.log(`Logging in as ${selectedRole} with:`, formData)
     try {
-      const response = await axios.post("http://localhost:5000/login", {
+      const response = await axios.post(`${url}login`, {
         id: formData.id,
         password: formData.password,
         role: selectedRole,

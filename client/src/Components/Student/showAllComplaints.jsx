@@ -4,6 +4,8 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { useNavigate, useLocation } from "react-router-dom"
 import "../Styles/ShowAllComplaints.css"
+const url = import.meta.env.VITE_BASE_URL;
+
 
 export default function ShowAllComplaints() {
   const location = useLocation()
@@ -21,7 +23,7 @@ export default function ShowAllComplaints() {
     }
 
     axios
-      .get("http://localhost:5000/showAllComplaints", { params: { ID } })
+      .get(`${url}showAllComplaints`, { params: { ID } })
       .then((response) => {
         setComplaints(response.data)
         setLoading(false)

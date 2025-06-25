@@ -2,6 +2,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "../Styles/AdminDashboard.css";
+const url = import.meta.env.VITE_BASE_URL;
+
 
 /**
  * SHOW-ALL-STUDENTS PAGE
@@ -21,7 +23,7 @@ export default function ShowAllStudents() {
   /* Fetch the full student list once on mount */
   useEffect(() => {
     axios
-      .get("http://localhost:5000/studentData")
+      .get(`${url}studentData`)
       .then(res => setStudentData(res.data.user))
       .catch(err => { console.error(err); setError(true); });
   }, []);

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../Styles/showAllLeave.css";
+const url = import.meta.env.VITE_BASE_URL;
 
 export default function ShowAllLeaveReq() {
   const location = useLocation();
@@ -14,7 +15,7 @@ export default function ShowAllLeaveReq() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/leaveRequests`, { params: { StudentID: ID } })
+      .get(`${url}leaveRequests`, { params: { StudentID: ID } })
       .then((res) => {
         setRequests(res.data);
       })

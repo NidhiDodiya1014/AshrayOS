@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../Styles/ComplaintForm.css";
+const url = import.meta.env.VITE_BASE_URL;
+
 
 export default function ComplaintForm() {
   const location = useLocation();
@@ -36,7 +38,7 @@ export default function ComplaintForm() {
     const complaintData = { ID, Name, Email, Complaint };
 
     axios
-      .post("http://localhost:5000/complaint", complaintData)
+      .post(`${url}complaint`, complaintData)
       .then((response) => {
         console.log("Complaint submitted successfully:", response.data);
         setSubmitStatus("✅ Complaint submitted successfully!");

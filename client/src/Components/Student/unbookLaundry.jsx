@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { useNavigate, useLocation } from "react-router-dom"
 import "../Styles/unbookLaundry.css"
+const url = import.meta.env.VITE_BASE_URL;
+
 
 export default function LaundrySlots() {
   
@@ -22,7 +24,7 @@ export default function LaundrySlots() {
   /* 2 ⟶ fetch helper */
   const fetchSlots = () =>
     axios
-      .get("http://localhost:5000/laundrySlots", { params: { ID } })
+      .get(`${url}laundrySlots`, { params: { ID } })
       .then((r) => setSlots(r.data))
       .catch((e) => console.error("Error fetching laundry slots:", e))
 
@@ -118,7 +120,7 @@ export default function LaundrySlots() {
         <button
           onClick={() =>
             axios
-              .post("http://localhost:5000/unbookLaundry", {
+              .post(`${url}unbookLaundry`, {
                 SlotID: slot.SlotID,
                 ID,
               })

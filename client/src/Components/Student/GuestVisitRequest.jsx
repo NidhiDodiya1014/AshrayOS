@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+const url = import.meta.env.VITE_BASE_URL;
+
 
 export default function GuestVisitRequest() {
   const navigate = useNavigate();
@@ -27,7 +29,7 @@ export default function GuestVisitRequest() {
     setStatusMessage("");
     console.log({ ID, Name, Email });
     axios
-      .post("http://localhost:5000/guestVisitRequest", {
+      .post(`${url}guestVisitRequest`, {
         StudentID: ID,
         GuestName: guestName,
         GuestIDProof: guestIDProof,

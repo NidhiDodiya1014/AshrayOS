@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "../Styles/RoomChange.css";
+const url = import.meta.env.VITE_BASE_URL;
+
 
 export default function RoomChange() {
   const location = useLocation();
@@ -28,7 +30,7 @@ export default function RoomChange() {
     setStatusMessage("");
 
     axios
-      .post("http://localhost:5000/roomChangeRequest", {
+      .post(`${url}roomChangeRequest`, {
         StudentID: ID,
         CurrentRoom: currentRoom,
         DesiredRoom: newRoom,

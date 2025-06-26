@@ -22,9 +22,7 @@ The system provides secure login functionality for all user types with role-base
 ---
 
 ### 👑 Admin Portal
-
-The admin portal provides complete system oversight with advanced management capabilities.
-
+To login as an Admin you may take the UserID=`202303009` and Password=`mypassword`
 #### 🛡️ Warden Management
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px;">

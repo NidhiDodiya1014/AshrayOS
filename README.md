@@ -1,9 +1,5 @@
 # AshrayOS - Hostel Management System
 
-<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px;">
-  <img src="Assets/Screenshot%202025-06-26%20183325.png" alt="AshrayOS Main Dashboard" width="280"/>
-</div>
-
 AshrayOS is a robust, full-stack hostel management system built to simplify and automate day-to-day hostel operations for administrators, wardens, and students. Featuring secure authentication and role-based portals, AshrayOS enables seamless management of room allocations, complaints, guest requests, and laundry services in a user-friendly interface.
 
 ---
@@ -13,6 +9,9 @@ AshrayOS is a robust, full-stack hostel management system built to simplify and 
 ### 🔐 Secure Authentication System
 
 The system provides secure login functionality for all user types with role-based access control. Users can authenticate as Students, Wardens, or Administrators, each with tailored access permissions and interface customizations.
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px;">
+  <img src="Assets/Screenshot%202025-06-26%20183325.png" alt="AshrayOS Main Dashboard" width="280"/>
+</div>
 
 **Authentication Features:**
 - Role-based login (Student/Warden/Admin)

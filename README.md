@@ -294,28 +294,6 @@ We welcome contributions from the community! Here's how you can help:
 5. Push to the branch: `git push origin feature/amazing-feature`
 6. Submit a Pull Request
 
-### Contribution Guidelines
-- Follow existing code style and conventions
-- Write clear, descriptive commit messages
-- Include tests for new features
-- Update documentation as needed
-- Ensure all tests pass before submitting
-
----
-
-## 📞 Support & Documentation
-
-### Getting Help
-- **Email**: support@ashrayos.com
-- **GitHub Issues**: Report bugs and request features
-- **Documentation**: Comprehensive guides in `/docs` folder
-
-### System Requirements
-- **OS**: Windows 10+, macOS 10.14+, Ubuntu 18.04+
-- **RAM**: 4GB minimum (8GB recommended)
-- **Storage**: 2GB free space
-- **Browser**: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
-
 ---
 
 ## 📄 License
@@ -328,38 +306,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Developed with ❤️ by [Nidhi Dodiya](https://github.com/nidhidodiya1014)**
 
-Special thanks to:
-- Beta testers from various hostels
-- Contributors who provided valuable feedback
-- Open source community for amazing tools and libraries
-
 ---
 
 ## 🔗 Links & Resources
 
 - **GitHub Repository**: [AshrayOS](https://github.com/nidhidodiya1014/AshrayOS)
-- **Live Demo**: [Demo Link](https://ashrayos-demo.vercel.app)
-- **Documentation**: [Full Documentation](https://docs.ashrayos.com)
-- **API Reference**: [API Docs](https://api.ashrayos.com/docs)
-
----
-
-## 📈 Roadmap
-
-### Upcoming Features
-- [ ] Mobile application (React Native)
-- [ ] Push notifications
-- [ ] Advanced analytics dashboard
-- [ ] Multi-language support
-- [ ] Integration with payment gateways
-- [ ] Automated room allocation system
-
-### Version History
-- **v1.3.0** (Current) - Enhanced UI/UX, improved security
-- **v1.2.0** - Added laundry booking system
-- **v1.1.0** - Implemented guest management
-- **v1.0.0** - Initial release with core features
-
 ---
 
 *Last Updated: June 26, 2025*

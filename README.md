@@ -2,23 +2,7 @@
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px;">
   <img src="Assets/Screenshot%202025-06-26%20183325.png" alt="AshrayOS Main Dashboard" width="280"/>
-  <img src="Assets/Screenshot%202025-06-26%20183341.png" alt="Login Interface" width="280"/>
-  <img src="Assets/Screenshot%202025-06-26%20183400.png" alt="Student Dashboard" width="280"/>
-  <img src="Assets/Screenshot%202025-06-26%20183457.png" alt="Student Profile View" width="280"/>
-  <img src="Assets/Screenshot%202025-06-26%20183513.png" alt="Room Change Request System" width="280"/>
-  <img src="Assets/Screenshot%202025-06-26%20183615.png" alt="Leave Request Interface" width="280"/>
-  <img src="Assets/Screenshot%202025-06-26%20183632.png" alt="Complaint Filing System" width="280"/>
-  <img src="Assets/Screenshot%202025-06-26%20183724.png" alt="Guest Entry Request" width="280"/>
-  <img src="Assets/Screenshot%202025-06-26%20183749.png" alt="Laundry Booking Interface" width="280"/>
-  <img src="Assets/Screenshot%202025-06-26%20183830.png" alt="Warden Dashboard" width="280"/>
-  <img src="Assets/Screenshot%202025-06-26%20183928.png" alt="Warden Request Management" width="280"/>
-  <img src="Assets/Screenshot%202025-06-26%20184050.png" alt="Student Directory" width="280"/>
-  <img src="Assets/Screenshot%202025-06-26%20184105.png" alt="Admin Dashboard" width="280"/>
-  <img src="Assets/Screenshot%202025-06-26%20184139.png" alt="Warden Management Interface" width="280"/>
-  <img src="Assets/Screenshot%202025-06-26%20184148.png" alt="Student Records System" width="280"/>
 </div>
-
-
 
 AshrayOS is a robust, full-stack hostel management system built to simplify and automate day-to-day hostel operations for administrators, wardens, and students. Featuring secure authentication and role-based portals, AshrayOS enables seamless management of room allocations, complaints, guest requests, and laundry services in a user-friendly interface.
 
@@ -38,68 +22,45 @@ The system provides secure login functionality for all user types with role-base
 
 ---
 
-### 🎓 Student Portal
+### 👑 Admin Portal
 
-The student portal provides a comprehensive dashboard with intuitive navigation and quick access to all essential hostel services.
+The admin portal provides complete system oversight with advanced management capabilities.
 
-#### 📋 Personal Information Management
+#### 🛡️ Warden Management
 
-- **View Profile**: Access complete personal and room information
-- **Room Details**: Current room assignment and roommate information
-- **Contact Information**: Update personal contact details
-- **Academic Information**: View enrolled course and semester details
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px;">
+  <img src="Assets/Screenshot%202025-06-26%20183341.png" alt="Login Interface" width="280"/>
+  <img src="Assets/Screenshot%202025-06-26%20183400.png" alt="Student Dashboard" width="280"/>
+  <img src="Assets/Screenshot%202025-06-26%20183457.png" alt="Student Profile View" width="280"/>
+  <img src="Assets/Screenshot%202025-06-26%20183513.png" alt="Room Change Request System" width="280"/>
+</div>
 
-#### 🏠 Room Change Requests
+Comprehensive warden administration:
 
-Students can easily request room changes through an intuitive interface:
+- Add new wardens to the system
+- View complete warden directory
+- Remove wardens when necessary
+- Assign warden responsibilities and permissions
+  
+#### 📈 Student Records Management
 
-- Submit new room change requests with reasons
-- Track application status in real-time
-- View request history and outcomes
-- Receive notifications on status updates
+Advanced student data management:
 
-#### 🎫 Leave Request Management
-
-Streamlined leave application process:
-
-- Submit leave requests with dates and reasons
-- Upload supporting documents if required
-- Monitor approval status
-- View leave history and remaining quota
-
-#### 📝 Complaint Management System
-
-Comprehensive complaint handling with categorized issue reporting:
-
-- File complaints by category (Maintenance, Food, Cleanliness, etc.)
-- Attach photos or documents as evidence
-- Track complaint resolution progress
-- Rate satisfaction with resolution
-
-#### 👥 Guest Visit Management
-
-Efficient guest entry request system:
-
-- Register guest visits in advance
-- Provide visitor details and purpose
-- Track approval status
-- Generate visitor passes upon approval
-
-#### 🧺 Smart Laundry Booking System
-
-Advanced laundry management with real-time availability:
-
-- **Real-time Slot Availability**: View available washing machine slots
-- **Time-bound Bookings**: Auto-expiring sessions prevent slot hogging
-- **Live Countdown**: Track remaining time for current bookings
-- **Flexible Unbooking**: Cancel bookings when plans change
-- **Usage History**: Track personal laundry usage patterns
+- Access complete student database
+- Export student records for reporting
+- Monitor system-wide student activity
+- Generate comprehensive analytics
 
 ---
 
 ### 🛡️ Warden Portal
 
-The warden portal offers comprehensive oversight tools for managing student requests and hostel operations efficiently.
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px;">
+  <img src="Assets/Screenshot%202025-06-26%20183615.png" alt="Leave Request Interface" width="280"/>
+  <img src="Assets/Screenshot%202025-06-26%20183632.png" alt="Complaint Filing System" width="280"/>
+</div>
+
+The warden portal offers comprehensive oversight tools for managing student requests and hostel operations efficiently
 
 #### 📊 Request Management Dashboard
 
@@ -121,27 +82,70 @@ Complete student information access:
 
 ---
 
-### 👑 Admin Portal
+### 🎓 Student Portal
 
-The admin portal provides complete system oversight with advanced management capabilities.
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px;">
+  <img src="Assets/Screenshot%202025-06-26%20183724.png" alt="Guest Entry Request" width="280"/>
+  <img src="Assets/Screenshot%202025-06-26%20183749.png" alt="Laundry Booking Interface" width="280"/>
+  <img src="Assets/Screenshot%202025-06-26%20183830.png" alt="Warden Dashboard" width="280"/>
+  <img src="Assets/Screenshot%202025-06-26%20183928.png" alt="Warden Request Management" width="280"/>
+  <img src="Assets/Screenshot%202025-06-26%20184050.png" alt="Student Directory" width="280"/>
+  <img src="Assets/Screenshot%202025-06-26%20184105.png" alt="Admin Dashboard" width="280"/>
+  <img src="Assets/Screenshot%202025-06-26%20184139.png" alt="Warden Management Interface" width="280"/>
+  <img src="Assets/Screenshot%202025-06-26%20184148.png" alt="Student Records System" width="280"/>
+</div>
 
-#### 🛡️ Warden Management
+The student portal provides a comprehensive dashboard with intuitive navigation and quick access to all essential hostel services.
 
-Comprehensive warden administration:
+#### 📋 Personal Information Management
 
-- Add new wardens to the system
-- View complete warden directory
-- Remove wardens when necessary
-- Assign warden responsibilities and permissions
+- **View Profile**: Access complete personal and room information
+- **Room Details**: Current room assignment and roommate information
+- **Contact Information**: Update personal contact details
+- **Academic Information**: View enrolled course and semester details
 
-#### 📈 Student Records Management
+#### 🏠 Room Change Requests
 
-Advanced student data management:
+Students can easily request room changes through an intuitive interface:
 
-- Access complete student database
-- Export student records for reporting
-- Monitor system-wide student activity
-- Generate comprehensive analytics
+- Submit new room change requests with reasons
+- Track application status in real-time
+- View request history and outcomes
+- Receive status updates
+
+#### 🎫 Leave Request Management
+
+Streamlined leave application process:
+
+- Submit leave requests with dates and reasons
+- Monitor approval status
+- View leave history and remaining quota
+
+#### 📝 Complaint Management System
+
+Comprehensive complaint handling with categorized issue reporting:
+
+- File complaints by category (Maintenance, Food, Cleanliness, etc.)
+- Track complaint resolution progress
+
+#### 👥 Guest Visit Management
+
+Efficient guest entry request system:
+
+- Register guest visits in advance
+- Provide visitor details and purpose
+- Track approval status
+- Generate visitor passes upon approval
+
+#### 🧺 Smart Laundry Booking System
+
+Advanced laundry management with real-time availability:
+
+- **Real-time Slot Availability**: View available washing machine slots
+- **Time-bound Bookings**: Auto-expiring sessions prevent slot hogging
+- **Live Countdown**: Track remaining time for current bookings
+- **Flexible Unbooking**: Cancel bookings when plans change
+- **Usage History**: Track personal laundry usage patterns
 
 ---
 
@@ -251,54 +255,6 @@ AshrayOS/
 
 ---
 
-## 📡 API Documentation
-
-### 🔐 Authentication Endpoints
-
-| Method | Endpoint | Description | Parameters |
-|--------|----------|-------------|------------|
-| POST | `/api/login` | User authentication | `username, password, role` |
-| POST | `/api/logout` | User logout | `token` |
-
-### 🎓 Student API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/student/profile` | Get student profile |
-| POST | `/api/student/complaint` | Submit complaint |
-| GET | `/api/student/complaints` | Get all complaints |
-| POST | `/api/student/leave-request` | Submit leave request |
-| GET | `/api/student/leave-requests` | Get leave requests |
-| POST | `/api/student/room-change` | Request room change |
-| POST | `/api/student/guest-request` | Submit guest visit request |
-
-### 🧺 Laundry API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/laundry/slots` | Get available slots |
-| POST | `/api/laundry/book` | Book a laundry slot |
-| DELETE | `/api/laundry/unbook` | Cancel booking |
-
-### 🛡️ Warden API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/warden/requests` | Get all pending requests |
-| PUT | `/api/warden/approve-request` | Approve/reject requests |
-| GET | `/api/warden/students` | Get student directory |
-
-### 👑 Admin API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/admin/students` | Get all students |
-| GET | `/api/admin/wardens` | Get all wardens |
-| POST | `/api/admin/add-warden` | Add new warden |
-| DELETE | `/api/admin/remove-warden` | Remove warden |
-
----
-
 ## 🎯 Key System Benefits
 
 ### For Students
@@ -323,12 +279,7 @@ AshrayOS/
 
 ## 🔒 Security & Privacy
 
-- **Data Encryption**: All sensitive data encrypted at rest and in transit
 - **Role-based Access**: Strict permission controls for different user types
-- **Session Security**: Secure session management with automatic timeouts
-- **Input Validation**: Comprehensive validation to prevent security vulnerabilities
-- **Audit Trails**: Complete logging of all system activities
-
 ---
 
 ## 🤝 Contributing
@@ -414,6 +365,5 @@ Special thanks to:
 *Last Updated: June 26, 2025*
 
 **⭐ If you find AshrayOS helpful, please consider giving it a star on GitHub!**
-```
 ```
 

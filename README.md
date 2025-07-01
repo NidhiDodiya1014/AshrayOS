@@ -1,6 +1,7 @@
 # AshrayOS - Hostel Management System
 
 AshrayOS is a robust, full-stack hostel management system built to simplify and automate day-to-day hostel operations for administrators, wardens, and students. Featuring secure authentication and role-based portals, AshrayOS enables seamless management of room allocations, complaints, guest requests, and laundry services in a user-friendly interface.
+- **Deployed App**: [AshrayOS](http://168.231.121.197:9011/)
 
 ---
 
